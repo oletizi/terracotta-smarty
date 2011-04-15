@@ -13,6 +13,7 @@ $smarty->setConfigDir('configs');
 $id = (isset($_GET["id"])) ? trim($_GET["id"]) : "index";
 $file = "content/{$id}.html";
 
+// default template.
 $template = "index.tpl";
 
 if (file_exists($file)) {
@@ -20,6 +21,9 @@ if (file_exists($file)) {
   $my_template = $content->find('[id=template]');
   if ($my_template) {
     $template = $my_template[0]->innertext;
+  } else {
+    // TODO: Error handling
+    echo "MY TEMPLATE IS UNDEFINED<br/>";
   }
   $chunks = $content->find('[id^=tpl_]');
   foreach ($chunks as $chunk) {    
